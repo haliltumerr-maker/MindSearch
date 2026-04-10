@@ -13,5 +13,4 @@ RUN conda create --name fastapi python=3.10 -y && \
 
 EXPOSE 8002
 
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "fastapi"]
-CMD ["python3", "-m", "mindsearch.app", "--asy", "--host", "0.0.0.0", "--port", "8002"]
+CMD ["conda", "run", "--no-capture-output", "-n", "fastapi", "python3", "-m", "mindsearch.app", "--asy", "--host", "0.0.0.0", "--port", "8002"]
