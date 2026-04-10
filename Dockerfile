@@ -1,16 +1,12 @@
-FROM continuumio/miniconda3
-
-ENV PATH=/opt/conda/bin:$PATH
+FROM python:3.10-slim
 
 WORKDIR /app
 
 COPY . .
 
-RUN conda create --name fastapi python=3.10 -y && \
-    conda run -n fastapi pip install janus && \
-    conda run -n fastapi pip install -r requirements.txt && \
-    conda clean --all -f -y
+RUN pip install --no-cache-dir janus && \
+    pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8002
 
-CMD ["conda", "run", "--no-capture-output", "-n", "fastapi", "python3", "-m", "mindsearch.app", "--asy", "--host", "0.0.0.0", "--port", "8002"]
+CMD ["python3", "-m", "mindsearch.app", "--asy", "--host", "0.0.0.0", "--port", "8002"]
