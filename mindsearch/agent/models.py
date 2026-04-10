@@ -93,3 +93,12 @@ internlm_silicon = dict(
     repetition_penalty=1.02,
     stop_words=["<|im_end|>"],
 )
+groq = dict(
+    type=GPTAPI,
+    model_type="gpt-3.5-turbo",
+    key=os.environ.get("OPENAI_API_KEY", ""),
+    api_base=os.environ.get("OPENAI_API_BASE",
+                            "https://api.groq.com/openai/v1/chat/completions"),
+    max_new_tokens=4096,
+    temperature=0.7,
+)
