@@ -54,7 +54,6 @@ gpt4 = dict(
     api_base=os.environ.get("OPENAI_API_BASE",
                             "https://api.groq.com/openai/v1/chat/completions"),
 )
-)
 
 url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 qwen = dict(
