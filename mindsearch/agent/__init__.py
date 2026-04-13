@@ -57,7 +57,7 @@ def init_agent(lang="cn", model_format="internlm_server", search_engine="BingSea
         output_format=InterpreterParser(template=GRAPH_PROMPT_CN if lang == "cn" else GRAPH_PROMPT_EN),
         searcher_cfg=dict(
             llm=llm,
-            plugins=plugins,
+            actions=plugins,
             template=date,
             output_format=PluginParser(
                 template=searcher_system_prompt_cn if lang == "cn" else searcher_system_prompt_en,
