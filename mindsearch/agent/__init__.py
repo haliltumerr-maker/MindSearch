@@ -45,6 +45,10 @@ def init_agent(lang="cn",
 
     date = datetime.now().strftime("The current date is %Y-%m-%d.")
     plugins = [(dict(
+import logging
+logging.warning(f"DEBUG plugins: {plugins}")
+logging.warning(f"DEBUG search_engine: {search_engine}")
+logging.warning(f"DEBUG WEB_SEARCH_API_KEY: {os.getenv('WEB_SEARCH_API_KEY', 'NOT FOUND')}")
         type=AsyncWebBrowser if use_async else WebBrowser,
         searcher_type=search_engine,
         topk=6,
