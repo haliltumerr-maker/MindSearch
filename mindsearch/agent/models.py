@@ -69,8 +69,6 @@ groq = dict(
     api_base="https://api.groq.com/openai/v1/chat/completions",
     max_new_tokens=4096,
     temperature=0.7,
-    frequency_penalty=0,
-    presence_penalty=0,
 )
 
 qwen = dict(
