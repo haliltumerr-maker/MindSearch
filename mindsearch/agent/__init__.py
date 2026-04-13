@@ -2,7 +2,7 @@ import os
 import logging
 from copy import deepcopy
 from datetime import datetime
-from lagent.actions import AsyncWebBrowser, WebBrowser
+from lagent.actions import AsyncWebBrowser, WebBrowser, ActionExecutor
 from lagent.agents.stream import get_plugin_prompt
 from lagent.prompts import InterpreterParser, PluginParser
 from lagent.utils import create_object
@@ -48,6 +48,7 @@ def init_agent(lang="cn", model_format="internlm_server", search_engine="BingSea
         topk=6,
         api_key=os.getenv("WEB_SEARCH_API_KEY"),
     ))]
+    plugin_executor = ActionExecutor(actions=plugins)
     logging.warning(f"DEBUG plugins: {plugins}")
     logging.warning(f"DEBUG search_engine: {search_engine}")
     logging.warning(f"DEBUG WEB_SEARCH_API_KEY: {os.getenv('WEB_SEARCH_API_KEY', 'NOT FOUND')}")
@@ -55,6 +56,7 @@ def init_agent(lang="cn", model_format="internlm_server", search_engine="BingSea
         llm=llm,
         template=date,
         output_format=InterpreterParser(template=GRAPH_PROMPT_CN if lang == "cn" else GRAPH_PROMPT_EN),
+        plugin_executor=plugin_executor,
         searcher_cfg=dict(
             llm=llm,
             plugins=plugins,
