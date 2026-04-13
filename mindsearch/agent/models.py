@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 from lagent.llms import (
     GPTAPI,
@@ -46,27 +45,37 @@ internlm_hf = dict(
     repetition_penalty=1.02,
     stop_words=["<|im_end|>"],
 )
-# openai_api_base needs to fill in the complete chat api address, such as: https://api.openai.com/v1/chat/completions
+
 gpt4 = dict(
     type=GPTAPI,
-    model_type=os.environ.get("OPENAI_MODEL", "llama-3.3-70b-versatile"),
-    key=os.environ.get("OPENAI_API_KEY", "YOUR OPENAI API KEY"),
-    api_base=os.environ.get("OPENAI_API_BASE",
-                            "https://api.groq.com/openai/v1/chat/completions"),
+    model_type="gpt-4-turbo",
+    key=os.environ.get("OPENAI_API_KEY", ""),
+    api_base="https://api.openai.com/v1/chat/completions",
 )
 
-url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+gemini = dict(
+    type=GPTAPI,
+    model_type="gpt-3.5-turbo",
+    key=os.environ.get("GEMINI_API_KEY", ""),
+    api_base="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+    max_new_tokens=4096,
+    temperature=0.7,
+)
+
+groq = dict(
+    type=GPTAPI,
+    model_type="gpt-3.5-turbo",
+    key=os.environ.get("GROQ_API_KEY", ""),
+    api_base="https://api.groq.com/openai/v1/chat/completions",
+    max_new_tokens=4096,
+    temperature=0.7,
+)
+
 qwen = dict(
     type=GPTAPI,
     model_type="qwen-max-longcontext",
-    key=os.environ.get("QWEN_API_KEY", "YOUR QWEN API KEY"),
-    api_base=url,
-    meta_template=[
-        dict(role="system", api_role="system"),
-        dict(role="user", api_role="user"),
-        dict(role="assistant", api_role="assistant"),
-        dict(role="environment", api_role="system"),
-    ],
+    key=os.environ.get("QWEN_API_KEY", ""),
+    api_base="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
     top_p=0.8,
     top_k=1,
     temperature=0,
@@ -78,35 +87,12 @@ qwen = dict(
 internlm_silicon = dict(
     type=GPTAPI,
     model_type="internlm/internlm2_5-7b-chat",
-    key=os.environ.get("SILICON_API_KEY", "YOUR SILICON API KEY"),
+    key=os.environ.get("SILICON_API_KEY", ""),
     api_base="https://api.siliconflow.cn/v1/chat/completions",
-    meta_template=[
-        dict(role="system", api_role="system"),
-        dict(role="user", api_role="user"),
-        dict(role="assistant", api_role="assistant"),
-        dict(role="environment", api_role="system"),
-    ],
     top_p=0.8,
     top_k=1,
     temperature=0,
     max_new_tokens=8192,
     repetition_penalty=1.02,
     stop_words=["<|im_end|>"],
-)
-groq = dict(
-    type=GPTAPI,
-    model_type="gpt-3.5-turbo",
-    key=os.environ.get("OPENAI_API_KEY", ""),
-    api_base=os.environ.get("OPENAI_API_BASE",
-                            "https://api.groq.com/openai/v1/chat/completions"),
-    max_new_tokens=4096,
-    temperature=0.7,
-)
-gemini = dict(
-    type=GPTAPI,
-    model_type="gpt-3.5-turbo",
-    key=os.environ.get("AIzaSyB3lmrefsRTUfEoH8zo_VUuXaLE0Ubos4U", ""),
-    api_base="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
-    max_new_tokens=4096,
-    temperature=0.7,
 )
