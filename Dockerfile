@@ -7,7 +7,7 @@ COPY . .
 RUN pip install --no-cache-dir janus && \
     pip install --no-cache-dir -r requirements.txt
 
-RUN grep -n "plugin_executor\|interpreter_executor" /usr/local/lib/python3.10/site-packages/lagent/agents/stream.py
+RUN sed -i 's/if not self.interpreter_executor:/if False:/' /usr/local/lib/python3.10/site-packages/lagent/agents/stream.py
 
 EXPOSE 8002
 
