@@ -102,3 +102,11 @@ groq = dict(
     max_new_tokens=4096,
     temperature=0.7,
 )
+gemini = dict(
+    type=GPTAPI,
+    model_type="gpt-3.5-turbo",
+    key=os.environ.get(AIzaSyBtd6xsRQ7OCLu3rPCtsMAnidK279fVjlc),
+    api_base="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+    max_new_tokens=4096,
+    temperature=0.7,
+)
