@@ -1,3 +1,15 @@
+# Patch lagent stream.py
+import lagent.agents.stream as _s
+import warnings
+_original_warn = warnings.warn
+def _filtered_warn(msg, *args, **kwargs):
+    if "plugin" not in str(msg) and "interpreter" not in str(msg):
+        _original_warn(msg, *args, **kwargs)
+warnings.warn = _filtered_warn
+
+# Force patch
+import inspect, re
+src = inspect.getsource(_s.AgentForInternLM.__init__)
 import os
 import logging
 from copy import deepcopy
